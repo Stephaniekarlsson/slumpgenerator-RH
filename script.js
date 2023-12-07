@@ -15,3 +15,9 @@ export const createNameArray = (userInput) => {
 
     return userInput.split(', ');
 }
+
+export const randomizer = (userInput) => {
+    const nameArray = createNameArray(userInput);
+
+    drawRandomName(nameArray);
+}
