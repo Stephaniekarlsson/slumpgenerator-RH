@@ -33,10 +33,14 @@ numberInput.addEventListener('keydown', (event) => {
 moveForwardBtn.addEventListener('click', () => {
 
     if (participants.length > 0) {
+
         formContainer.classList.add('hidden');
         dragAWinnerContainer.classList.remove('hidden');
+
     } else {
+
         alert('Lägg till minst en deltagare innan du går vidare.');
+
     }
 });
 
@@ -48,16 +52,22 @@ generateNameBtn.addEventListener('click', () => {
         userInput += `${participant.name}, `.repeat(participant.places);
     });
 
-    const results = randomizer(userInput);
+    userInput = userInput.slice(0, -2);
 
-    dragAWinnerContainer.classList.add('hidden');
-    spinnerContainer.classList.remove('hidden');
+    if (userInput.trim() !== '') {
+        const results = randomizer(userInput);
 
-    setTimeout(() => {
-        spinnerContainer.classList.add('hidden');
-        resultName.textContent = results + '!';
-        resultContainer.classList.remove('hidden');
-    }, 2555);
+        dragAWinnerContainer.classList.add('hidden');
+        spinnerContainer.classList.remove('hidden');
+
+        setTimeout(() => {
+            spinnerContainer.classList.add('hidden');
+            resultName.textContent = results + '!';
+            resultContainer.classList.remove('hidden');
+        }, 2555);
+    } else {
+        alert('Lägg till minst en deltagare med ett giltigt antal platser innan du drar en vinnare.');
+    }
 });
 
 

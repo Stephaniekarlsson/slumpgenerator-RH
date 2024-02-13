@@ -26,18 +26,15 @@ export const randomizer = (userInput) => {
 
 export const addParticipant = () => {
 
-    if (nameInput.value.trim() !== '' && numberInput.value > 0) {
-    
-        participants.push({ name: nameInput.value, places: parseInt(numberInput.value) });
+    const nameInput = document.querySelector('#name-input').value.trim();
+    const numberInput = parseInt(document.querySelector('#number-input').value, 10);
 
+    if (nameInput !== '' && !isNaN(numberInput) && numberInput > 0) {
+        participants.push({ name: nameInput, places: numberInput });
         updateAddedNames();
-
-        nameInput.value = '';
-        numberInput.value = 1;
-
-        console.log(participants);
+        resetInputFields();
     } else {
-        alert('Vänligen ange både namn och antal platser.');
+        alert('Vänligen ange både namn och ett giltigt antal platser.');
     }
 };
 
@@ -46,5 +43,10 @@ export const updateAddedNames = () => {
     participants.forEach((participant) => {
         addedNamesContainer.innerHTML += `${participant.name} (platser: ${participant.places})<br>`;
     });
+};
+
+const resetInputFields = () => {
+    document.querySelector('#name-input').value = '';
+    document.querySelector('#number-input').value = '1';
 };
 
