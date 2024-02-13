@@ -1,32 +1,63 @@
-export const drawRandomName = (names) => {
-    const maxLength = names?.length ?? 0;
-    const randomNumber = Math.floor(Math.random() * maxLength);
 
-    console.log(names[randomNumber]);
+import { randomizer, addParticipant } from './functions.js'
 
-    return names[randomNumber];
-}
+const moveForwardBtn = document.querySelector('#move-forward');
+const addNameBtn = document.querySelector('#addName');
+const generateNameBtn = document.querySelector('#drag-winner');
+const spinnerContainer = document.querySelector('.spinner-container.hidden');
+const formContainer = document.querySelector('.container.mt-5');
+const dragAWinnerContainer = document.querySelector('#drag');
+const resultContainer = document.querySelector('#result-container');
+const resultName = document.querySelector('.results');
+export const addedNamesContainer = document.querySelector('.added-names-container');
+export const nameInput = document.querySelector('#name-input');
+export const numberInput = document.querySelector('#number-input');
 
-export const createNameArray = (userInput) => {
-    if (!userInput ||userInput.length === 0){
-        return 'Inga namn finns!';
+
+export let participants = [];
+
+addNameBtn.addEventListener('click', addParticipant);
+nameInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        addParticipant();
     }
-    console.log(userInput.split(', '));
-
-    return userInput.split(', ');
-}
-
-export const randomizer = (userInput) => {
-    const nameArray = createNameArray(userInput);
-
-    drawRandomName(nameArray);
-}
-
-const generateNameBtn = document.querySelector('.btn');
-
-generateNameBtn.addEventListener ('click', () => {
-    const userInput = document.querySelector('#exampleFormControlInput1').value;
-    randomizer(userInput);
 });
 
-// Exempel 1, Exempel 2, Exempel 3, Exempel 4, Exempel 5, Exempel 6, Exempel 7, Exempel 8, Exempel 9, Exempel 10, Exempel 11, Exempel 12
+numberInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        addParticipant();
+    }
+});
+
+
+moveForwardBtn.addEventListener('click', () => {
+
+    if (participants.length > 0) {
+        formContainer.classList.add('hidden');
+        dragAWinnerContainer.classList.remove('hidden');
+    } else {
+        alert('Lägg till minst en deltagare innan du går vidare.');
+    }
+});
+
+
+generateNameBtn.addEventListener('click', () => {
+    let userInput = '';
+
+    participants.forEach((participant) => {
+        userInput += `${participant.name}, `.repeat(participant.places);
+    });
+
+    const results = randomizer(userInput);
+
+    dragAWinnerContainer.classList.add('hidden');
+    spinnerContainer.classList.remove('hidden');
+
+    setTimeout(() => {
+        spinnerContainer.classList.add('hidden');
+        resultName.textContent = results + '!';
+        resultContainer.classList.remove('hidden');
+    }, 2555);
+});
+
+

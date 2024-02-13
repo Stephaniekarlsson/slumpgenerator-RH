@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>- Lottdragning</title>
-    <link href="Favicon.png" rel="icon" type="image/png">
+    <link href="bilder/Favicon.png" rel="icon" type="image/png">
     <link href="style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -16,19 +16,46 @@
 
 <body>
 <header>
-    <img  alt="Råtthjälpens logga" class="logga" src="Logga.png">
+    <img  alt="Råtthjälpens logga" class="logga" src="bilder/Logga.png">
     <h1 class="header-title">Råtthjälpens Lottdragning</h1>
 </header>
 
 <div class="container mt-5">
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Deltagare</label>
-        <textarea rows="7" class="form-control" id="exampleFormControlInput1" placeholder="Exempel 1, Exempel 2, Exempel 3..."></textarea>
+        <label for="name-input" class="form-label">Deltagare</label>
+        <form id="name-inputs">
+            <input type="text" id="name-input" class="form-control" placeholder="För- och efternamn">
+            <input type="number" id="number-input" class="form-control"  min="1" value="1">
+        </form>
+
+        <button type="button" id="addName" class="btn btn-color">Lägg till</button>
+
+        <div class="added-names-container"></div>
+
+        <!-- <textarea rows="7" class="form-control" id="exampleFormControlInput1" placeholder="Exempel 1, Exempel 2, Exempel 3..."></textarea> -->
     </div>
-    <button type="submit" class="btn btn-color">Dra en vinnare!</button>
+    <div class="move-forward-container">
+        <button type="submit" id="move-forward" class="btn btn-color">Gå vidare</button>
+    </div>
+
+</div>
+
+<div id="drag" class="container hidden">
+    <h2>Då var det dags!</h2>
+    <button type="submit" id="drag-winner" class="btn btn-color">Dra en vinnare!</button>
 </div>
 
 
+
+<div class="spinner-container hidden">
+    <img class="spinner-img" src="bilder/Logga.png">
+    <div class="spinner-sector"></div>
+</div>
+
+<div id="result-container" class="hidden">
+    <h2>Stort grattis till</h2>
+    <p class="results"></p>
+</div>
 
 <script src="script.js" type="module"></script>
 <script crossorigin="anonymous"
