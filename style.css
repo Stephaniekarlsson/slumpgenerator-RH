@@ -115,7 +115,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: -35em auto;
+    margin: -40em auto;
     overflow: hidden;
     position: relative;
 }
@@ -149,7 +149,7 @@ header {
 }
 
 #result-container {
-    margin-top: 10em;
+    margin-top: 15em;
 }
 #result-container > h2, #result-container > p, #drag > h2 {
     color: #fcfefe;
