@@ -94,6 +94,10 @@ header {
     margin-top: .5em;
 }
 
+.winner-quantity {
+    margin-top: 1em;
+}
+
 #move-forward {
     width: 100%;
 }
@@ -151,20 +155,20 @@ header {
 #result-container {
     margin-top: 15em;
 }
-#result-container > h2, #result-container > p, #drag > h2 {
+
+#result-container, #drag > h2 {
     color: #fcfefe;
     font-family: "Roboto", sans-serif;
     text-align: center;
 }
 
-#result-container > h2 {
-    font-size: 5em;
+#result-container > strong {
+    font-size: 3em;
 }
 
-#result-container > p {
-    font-size: 4em;
+.winner-text {
+    font-size: 2em;
 }
-
 
 .hidden {
     visibility: hidden;
@@ -203,7 +207,7 @@ header {
 }
 
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     #result-container > h2 {
         font-size: 2.5em;
     }
@@ -211,4 +215,4 @@ header {
     #result-container > p {
         font-size: 2em;
     }
-}
+} */

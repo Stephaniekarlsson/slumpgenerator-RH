@@ -18,11 +18,31 @@ export const createNameArray = (userInput) => {
     return userInput.split(', ');
 };
 
-export const randomizer = (userInput) => {
+
+export const randomizer = (userInput, numberOfWinners) => {
     const nameArray = createNameArray(userInput);
 
-    return drawRandomName(nameArray);
+    const shuffledArray = shuffleArray(nameArray);
+
+    const winners = [];
+    for (let i = 0; i < Math.min(numberOfWinners, shuffledArray.length); i++) {
+        const prizeCategory = getPrizeCategory(i + 1);
+        winners.push({ name: shuffledArray[i], prize: prizeCategory });
+    }
+
+    return winners;
 };
+
+
+const shuffleArray = (array) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+};
+
 
 export const addParticipant = () => {
 
@@ -49,4 +69,38 @@ const resetInputFields = () => {
     document.querySelector('#name-input').value = '';
     document.querySelector('#number-input').value = '1';
 };
+
+const getPrizeCategory = (position) => {
+    switch (position) {
+        case 1:
+            return 'Första pris';
+        case 2:
+            return 'Andra pris';
+        default:
+            return `Pris ${position}`;
+    }
+};
+
+export const displayPrizes = (winners) => {
+    const prizesContainer = document.querySelector('#result-container');
+    prizesContainer.innerHTML = '';
+
+    if (winners.length === 1) {
+        const winner = winners[0];
+        prizesContainer.innerHTML += `<strong>Stort grattis! </strong><br><span class="winner-text">${winner.name}</span><br>`;
+    } else {
+        prizesContainer.innerHTML += '<strong>Stort grattis!</strong><br>';
+
+        winners.forEach((winner) => {
+            prizesContainer.innerHTML += `<span class="winner-text">${winner.prize}: ${winner.name}</span><br>`;
+        });
+    }
+    confetti({
+        particleCount: 300,
+        spread: 200,
+
+    })
+
+};
+
 

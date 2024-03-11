@@ -1,5 +1,5 @@
 
-import { randomizer, addParticipant } from './functions.js'
+import { randomizer, addParticipant, displayPrizes } from './functions.js'
 
 const moveForwardBtn = document.querySelector('#move-forward');
 const addNameBtn = document.querySelector('#addName');
@@ -44,7 +44,6 @@ moveForwardBtn.addEventListener('click', () => {
     }
 });
 
-
 generateNameBtn.addEventListener('click', () => {
     let userInput = '';
 
@@ -55,19 +54,21 @@ generateNameBtn.addEventListener('click', () => {
     userInput = userInput.slice(0, -2);
 
     if (userInput.trim() !== '') {
-        const results = randomizer(userInput);
+        const numberOfWinners = parseInt(document.querySelector('#winners-input').value, 10);
+        const results = randomizer(userInput, numberOfWinners);
 
         dragAWinnerContainer.classList.add('hidden');
         spinnerContainer.classList.remove('hidden');
 
         setTimeout(() => {
             spinnerContainer.classList.add('hidden');
-            resultName.textContent = results + '!';
+            displayPrizes(results);
             resultContainer.classList.remove('hidden');
         }, 2555);
     } else {
         alert('Lägg till minst en deltagare med ett giltigt antal platser innan du drar en vinnare.');
     }
 });
+
 
 
