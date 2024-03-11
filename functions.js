@@ -19,19 +19,40 @@ export const createNameArray = (userInput) => {
 };
 
 
+// export const randomizer = (userInput, numberOfWinners) => {
+//     const nameArray = createNameArray(userInput);
+
+//     const shuffledArray = shuffleArray(nameArray);
+
+//     const winners = [];
+//     for (let i = 0; i < Math.min(numberOfWinners, shuffledArray.length); i++) {
+//         const prizeCategory = getPrizeCategory(i + 1);
+//         winners.push({ name: shuffledArray[i], prize: prizeCategory });
+//     }
+
+//     return winners;
+// };
+
 export const randomizer = (userInput, numberOfWinners) => {
     const nameArray = createNameArray(userInput);
 
-    const shuffledArray = shuffleArray(nameArray);
+    
+    const eligibleParticipants = participants.filter(participant => !participant.won);
+
+    const shuffledArray = shuffleArray(eligibleParticipants);
 
     const winners = [];
     for (let i = 0; i < Math.min(numberOfWinners, shuffledArray.length); i++) {
         const prizeCategory = getPrizeCategory(i + 1);
-        winners.push({ name: shuffledArray[i], prize: prizeCategory });
+        const winner = shuffledArray[i];
+        winners.push({ name: winner.name, prize: prizeCategory });
+
+        winner.won = true;
     }
 
     return winners;
 };
+
 
 
 const shuffleArray = (array) => {
