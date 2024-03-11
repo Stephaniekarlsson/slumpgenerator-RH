@@ -98,6 +98,14 @@ header {
     margin-top: 1em;
 }
 
+.remove-button {
+    background-color: transparent;
+    border-radius: .5em;
+    border: none;
+    font-weight: bold;
+    margin-left: .5em
+}
+
 #move-forward {
     width: 100%;
 }
@@ -207,12 +215,4 @@ header {
 }
 
 
-/* @media (max-width: 600px) {
-    #result-container > h2 {
-        font-size: 2.5em;
-    }
-    
-    #result-container > p {
-        font-size: 2em;
-    }
-} */
+

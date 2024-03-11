@@ -43,9 +43,7 @@ const shuffleArray = (array) => {
     return shuffledArray;
 };
 
-
 export const addParticipant = () => {
-
     const nameInput = document.querySelector('#name-input').value.trim();
     const numberInput = parseInt(document.querySelector('#number-input').value, 10);
 
@@ -58,17 +56,37 @@ export const addParticipant = () => {
     }
 };
 
+export const removeParticipant = (index) => {
+    participants.splice(index, 1);
+    updateAddedNames();
+};
+
 export const updateAddedNames = () => {
     addedNamesContainer.innerHTML = '<strong>Tillagda namn:</strong><br>';
-    participants.forEach((participant) => {
-        addedNamesContainer.innerHTML += `${participant.name} (platser: ${participant.places})<br>`;
+    participants.forEach((participant, index) => {
+        const participantElement = document.createElement('div');
+        participantElement.innerHTML = `
+            ${participant.name} (platser: ${participant.places})
+            <button type="button" class="remove-button">X</button><br>
+        `;
+
+        const removeButton = participantElement.querySelector('.remove-button');
+        removeButton.addEventListener('click', () => removeParticipant(index));
+
+        addedNamesContainer.appendChild(participantElement);
     });
 };
 
 const resetInputFields = () => {
-    document.querySelector('#name-input').value = '';
-    document.querySelector('#number-input').value = '1';
+    const nameInput = document.querySelector('#name-input');
+    const numberInput = document.querySelector('#number-input');
+
+    nameInput.value = '';
+    numberInput.value = '1';
+
+    nameInput.focus(); 
 };
+
 
 const getPrizeCategory = (position) => {
     switch (position) {
